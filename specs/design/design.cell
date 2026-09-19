@@ -1,4 +1,5 @@
 title Todo Webapp with Authentication
+# Reconciled against the current PRD: no architectural change required.
 
 component todo-webapp as "Todo Webapp" web-application
 component todo-api as "Todo API" service
