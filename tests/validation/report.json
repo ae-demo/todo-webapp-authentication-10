@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "issue": 7,
+  "commit": "e7f3d6af731b362b691a2f7e4d27113abdbf35e2",
+  "generatedAt": "2026-09-19T06:02:05.568Z",
+  "playwrightVersion": "1.61.1",
+  "batches": [
+    {
+      "file": "2026-09-19T05-49-09-376Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-49-25-834Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-49-38-922Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-49-56-721Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-50-11-536Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-50-30-318Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-50-45-833Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-51-05-302Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-51-21-112Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-51-40-502Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-51-59-713Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-52-32-293Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-53-01-356Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-53-20-659Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-53-37-079Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-53-57-684Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-54-14-027Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-54-32-387Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-54-48-713Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-55-08-839Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-55-24-247Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-55-56-243Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-56-28-301Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-57-13-650Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T05-57-45-591Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T06-00-38-683Z.json",
+      "specs": 1
+    },
+    {
+      "file": "2026-09-19T06-01-18-398Z.json",
+      "specs": 1
+    }
+  ],
+  "totals": {
+    "e2e": {
+      "total": 12,
+      "pass": 11,
+      "fail": 1,
+      "notRun": 0
+    },
+    "manual": 0,
+    "scenario": 0
+  },
+  "criteria": [
+    {
+      "id": "AC-001-a",
+      "requirementId": "REQ-001",
+      "must": "An unauthenticated visitor is presented with a sign-in flow before seeing any todos",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-001-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 11824,
+      "failure": null,
+      "batch": "2026-09-19T05-49-25-834Z.json"
+    },
+    {
+      "id": "AC-001-b",
+      "requirementId": "REQ-001",
+      "must": "After signing in, the user lands on their own todo list",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-001-b.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 13573,
+      "failure": null,
+      "batch": "2026-09-19T05-49-56-721Z.json"
+    },
+    {
+      "id": "AC-002-a",
+      "requirementId": "REQ-002",
+      "must": "Submitting a title creates a new todo in the user's list",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-002-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 14198,
+      "failure": null,
+      "batch": "2026-09-19T05-50-30-318Z.json"
+    },
+    {
+      "id": "AC-002-b",
+      "requirementId": "REQ-002",
+      "must": "A newly created todo starts as not completed",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-002-b.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 14518,
+      "failure": null,
+      "batch": "2026-09-19T05-51-05-302Z.json"
+    },
+    {
+      "id": "AC-003-a",
+      "requirementId": "REQ-003",
+      "must": "The todo list screen shows every todo belonging to the signed-in user",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-003-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 14845,
+      "failure": null,
+      "batch": "2026-09-19T05-51-40-502Z.json"
+    },
+    {
+      "id": "AC-003-b",
+      "requirementId": "REQ-003",
+      "must": "A user never sees another user's todos in their list",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-003-b.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 27781,
+      "failure": null,
+      "batch": "2026-09-19T05-52-32-293Z.json"
+    },
+    {
+      "id": "AC-004-a",
+      "requirementId": "REQ-004",
+      "must": "Marking a todo as completed updates its status to completed",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-004-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 15171,
+      "failure": null,
+      "batch": "2026-09-19T05-53-20-659Z.json"
+    },
+    {
+      "id": "AC-004-b",
+      "requirementId": "REQ-004",
+      "must": "Unmarking a completed todo returns its status to not completed",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-004-b.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 15065,
+      "failure": null,
+      "batch": "2026-09-19T05-53-57-684Z.json"
+    },
+    {
+      "id": "AC-005-a",
+      "requirementId": "REQ-005",
+      "must": "Editing a todo's title and saving persists the new title",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-005-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 15065,
+      "failure": null,
+      "batch": "2026-09-19T05-54-32-387Z.json"
+    },
+    {
+      "id": "AC-006-a",
+      "requirementId": "REQ-006",
+      "must": "Deleting a todo removes it from the user's list",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-006-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 14125,
+      "failure": null,
+      "batch": "2026-09-19T05-55-08-839Z.json"
+    },
+    {
+      "id": "AC-007-a",
+      "requirementId": "REQ-007",
+      "must": "Signing out and signing back in shows the same todos as before sign-out",
+      "method": "e2e",
+      "status": "fail",
+      "spec": "tests/e2e/specs/AC-007-a.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 34437,
+      "failure": {
+        "message": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Sign In' })\nExpected: visible\nTimeout: 20000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" with timeout 20000ms\n  - waiting for getByRole('button', { name: 'Sign In' })\n",
+        "location": "AC-007-a.spec.ts:7"
+      },
+      "batch": "2026-09-19T06-01-18-398Z.json"
+    },
+    {
+      "id": "AC-007-b",
+      "requirementId": "REQ-007",
+      "must": "Todos added in one session are visible when signing in again from a different browser session",
+      "method": "e2e",
+      "status": "pass",
+      "spec": "tests/e2e/specs/AC-007-b.spec.ts",
+      "healed": false,
+      "healAttempts": 0,
+      "flaky": false,
+      "durationMs": 27918,
+      "failure": null,
+      "batch": "2026-09-19T05-55-56-243Z.json"
+    }
+  ]
+}
