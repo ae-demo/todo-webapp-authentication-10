@@ -1,0 +1,17 @@
+{
+  "name": "todo-api",
+  "type": "service",
+  "version": "0.1.0",
+  "language": "Ballerina",
+  "buildpack": "docker",
+  "appPath": "todo-api",
+  "entrypoint": "deployment/service",
+  "exposure": "intranet",
+  "dependencies": [
+    { "kind": "platform-resource", "name": "todo-db", "resourceType": "postgres-cnpg" },
+    { "kind": "platform-resource", "name": "user-auth", "resourceType": "thunder-app" }
+  ],
+  "description": "Owns the Todo entity: create, list, update, complete/uncomplete and delete a signed-in user's own todos, persisted in its own Postgres database. Scopes every read and write to the caller's userId, taken from the gateway's signed assertion. Does not manage user accounts or credentials — that is Thunder's job.",
+  "stories": [2, 3, 4, 5, 6, 7],
+  "skillsPinned": ["openapi-conventions", "ballerina", "api-management", "thunder-authentication"]
+}

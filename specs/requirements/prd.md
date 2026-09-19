@@ -35,8 +35,8 @@ No user can see or affect another user's todos.
 
 - **Sign-in**: users authenticate via SSO through Thunder, the platform identity provider — every web app in this organization signs users in this way (org default).
 - **Persistence**: todo entries are stored in a database so they survive sign-out, browser restarts, and device changes.
-- **Todo shape**: a todo has a title and a completed/not-completed status only — no due date, priority, or other fields *assumed*.
-- **Organization**: each user has a single flat list of todos — no named lists or categories *assumed*.
+- **Todo shape**: a todo has a title and a completed/not-completed status only — no due date, priority, or other fields .
+- **Organization**: each user has a single flat list of todos — no named lists or categories .
 - **Scope of ownership**: a user can only ever see and modify their own todos — there is no sharing or admin oversight of other users' lists.
 - **External services**: none are required for this product — authentication is covered by the platform's own Thunder SSO, and no other third-party capability (payments, email, maps, etc.) is part of this scope.
 
