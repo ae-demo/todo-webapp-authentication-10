@@ -1,0 +1,7 @@
+{
+  "targets": {
+    "todo-api": "https://development-default.apps.wso2con.openchoreo-poc.choreo.dev:443/todo-webapp-authentication-10-todo-api-http",
+    "todo-webapp": "https://http-todo-webapp-a-development-default-7aafcf6e.apps.wso2con.openchoreo-poc.choreo.dev:443/"
+  },
+  "primary": "todo-webapp"
+}
