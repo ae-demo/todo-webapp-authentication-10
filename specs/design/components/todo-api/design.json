@@ -7,11 +7,54 @@
   "appPath": "todo-api",
   "entrypoint": "deployment/service",
   "exposure": "intranet",
-  "dependencies": [
-    { "kind": "platform-resource", "name": "todo-db", "resourceType": "postgres-cnpg" },
-    { "kind": "platform-resource", "name": "user-auth", "resourceType": "thunder-app" }
+  "stories": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
   ],
   "description": "Owns the Todo entity: create, list, update, complete/uncomplete and delete a signed-in user's own todos, persisted in its own Postgres database. Scopes every read and write to the caller's userId, taken from the gateway's signed assertion. Does not manage user accounts or credentials — that is Thunder's job.",
-  "stories": [2, 3, 4, 5, 6, 7],
-  "skillsPinned": ["openapi-conventions", "ballerina", "api-management", "thunder-authentication"]
+  "dependencies": [
+    {
+      "kind": "platform-resource",
+      "name": "todo-db",
+      "resourceType": "postgres-cnpg",
+      "wiring": {
+        "ref": "todo-webapp-authe-7c83bc7a",
+        "envBindings": {
+          "dbname": "TODO_DB_DBNAME",
+          "host": "TODO_DB_HOST",
+          "password": "TODO_DB_PASSWORD",
+          "port": "TODO_DB_PORT",
+          "user": "TODO_DB_USER"
+        }
+      }
+    },
+    {
+      "kind": "platform-resource",
+      "name": "user-auth",
+      "resourceType": "thunder-app",
+      "wiring": {
+        "ref": "todo-webapp-authe-8e6cfca7",
+        "envBindings": {
+          "client_id": "USER_AUTH_CLIENT_ID",
+          "issuer": "USER_AUTH_ISSUER",
+          "jwks_url": "USER_AUTH_JWKS_URL",
+          "resource": "USER_AUTH_RESOURCE",
+          "scopes": "USER_AUTH_SCOPES"
+        }
+      }
+    }
+  ],
+  "exposesAPI": {
+    "auth": "end-user-required"
+  },
+  "skillsPinned": [
+    "openapi-conventions",
+    "ballerina",
+    "api-management",
+    "thunder-authentication"
+  ]
 }
