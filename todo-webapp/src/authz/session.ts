@@ -125,13 +125,20 @@ export async function handleCallback(): Promise<User> {
 }
 
 // The IdP's discovery document advertises no end_session_endpoint, so
-// signoutRedirect() rejects. Drop the LOCAL session instead.
+// signoutRedirect() rejects (removeUser() already ran inside it, as its
+// signout request build fails). Thunder's OWN session cookie survives that —
+// there is no way to end it from here — so a bare signinRedirect() on the
+// next visit would ride that still-live cookie straight back into the app
+// with no credentials prompt, making "sign out" a no-op the user can see.
+// prompt: "login" forces the IdP to re-prompt even though its session is
+// still alive, which is what makes signing out actually require signing back
+// in.
 export async function signOut(): Promise<void> {
   try {
     await userManager.signoutRedirect();
   } catch {
     await userManager.removeUser();
-    window.location.assign("/");
+    await userManager.signinRedirect({ prompt: "login" });
   }
 }
 
