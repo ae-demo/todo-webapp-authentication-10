@@ -1,0 +1,167 @@
+openapi: 3.0.3
+info:
+  title: Todo API
+  version: 0.1.0
+  description: Manages a signed-in user's personal todo list.
+servers:
+  - url: /
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth2/authorize
+          tokenUrl: /oauth2/token
+          scopes:
+            todos:read: The caller's own todos
+            todos:write: Create, update and delete the caller's own todos
+  schemas:
+    Todo:
+      type: object
+      required: [id, title, completed, createdAt, updatedAt]
+      properties:
+        id: { type: string, description: todo identifier }
+        title: { type: string, description: the task text }
+        completed: { type: boolean, description: whether the todo is done }
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    TodoCreate:
+      type: object
+      required: [title]
+      properties:
+        title: { type: string, description: the task text }
+    TodoUpdate:
+      type: object
+      properties:
+        title: { type: string, description: updated task text }
+        completed: { type: boolean, description: updated completion status }
+    Error:
+      type: object
+      required: [code, message]
+      properties:
+        code: { type: integer, description: HTTP or application error code }
+        message: { type: string, description: short human-readable label }
+        description: { type: string, description: detailed explanation }
+        moreInfo: { type: string, description: URI to documentation }
+security:
+  - oauth2: []
+paths:
+  /me/todos:
+    get:
+      operationId: listMyTodos
+      summary: The caller's todos
+      security:
+        - oauth2: [todos:read]
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20, maximum: 100 }
+        - name: offset
+          in: query
+          schema: { type: integer, default: 0 }
+        - name: completed
+          in: query
+          schema: { type: boolean }
+          description: filter by completion status
+      responses:
+        '200':
+          description: a page of the caller's todos
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [count, data]
+                properties:
+                  count: { type: integer, description: total matching items }
+                  next: { type: string, nullable: true, description: relative URI of the next page }
+                  previous: { type: string, nullable: true, description: relative URI of the previous page }
+                  data:
+                    type: array
+                    items: { $ref: '#/components/schemas/Todo' }
+        '401':
+          description: not signed in
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    post:
+      operationId: createMyTodo
+      summary: Add a todo to the caller's list
+      security:
+        - oauth2: [todos:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TodoCreate' }
+      responses:
+        '201':
+          description: the created todo
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Todo' }
+        '400':
+          description: invalid todo
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: not signed in
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+  /me/todos/{todoId}:
+    parameters:
+      - name: todoId
+        in: path
+        required: true
+        schema: { type: string }
+    patch:
+      operationId: updateMyTodo
+      summary: Edit or (un)complete one of the caller's todos
+      security:
+        - oauth2: [todos:write]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TodoUpdate' }
+      responses:
+        '200':
+          description: the updated todo
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Todo' }
+        '400':
+          description: invalid update
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '401':
+          description: not signed in
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: no such todo for this caller
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+    delete:
+      operationId: deleteMyTodo
+      summary: Delete one of the caller's todos
+      security:
+        - oauth2: [todos:write]
+      responses:
+        '204':
+          description: deleted
+        '401':
+          description: not signed in
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        '404':
+          description: no such todo for this caller
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
