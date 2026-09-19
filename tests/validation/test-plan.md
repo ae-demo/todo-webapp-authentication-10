@@ -192,3 +192,22 @@ data behind attributable to it beyond what AC-003-b's own assertions cover).
 - Source of truth: live exploration (session `default`'s "Persist across
   sessions" todo was visible again after a full fresh sign-in in a brand new
   browser context)
+
+## Re-validation 2026-09-19 — AC-007-a re-checked after #9/#10
+
+Between the prior run and this one, commit `99dbc0a` ("force
+re-authentication on sign-out", #9/#10) changed `todo-webapp/src/authz/session.ts`
+to call `signinRedirect({ prompt: "login" })` after `signoutRedirect()` fails,
+on the theory that the IdP advertises no `end_session_endpoint` and
+`signoutRedirect()` always rejects synchronously before navigating anywhere.
+
+Re-running `AC-007-a.spec.ts` (no changes made to the spec) against the
+redeployed app shows the same defect, reached the same way as before: the
+"Sign out" click still navigates the browser to the IdP's `/oauth2/logout`
+and lands on its error page with the text "invalid post_logout_redirect_uri"
+— the fix's premise doesn't hold in practice; the IdP evidently does accept
+the end-session request far enough to reject it on the `post_logout_redirect_uri`
+parameter, rather than the client rejecting it before ever navigating, so the
+`catch` branch that would trigger the new `prompt: "login"` retry never runs.
+The user is stranded on the IdP's error page, off-app, exactly as in the
+first run. Confirmed genuine (not a test issue) — not healed.
