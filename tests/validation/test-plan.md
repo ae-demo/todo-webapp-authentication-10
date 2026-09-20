@@ -211,3 +211,77 @@ parameter, rather than the client rejecting it before ever navigating, so the
 `catch` branch that would trigger the new `prompt: "login"` retry never runs.
 The user is stranded on the IdP's error page, off-app, exactly as in the
 first run. Confirmed genuine (not a test issue) — not healed.
+
+## Re-validation 2026-09-20 — pagination defect recurs, AC-007-a still fails
+
+No app commits landed between the 2026-09-19 re-validation and this run (HEAD
+is still `1574ac5`), so this cycle re-ran the same 12-spec regression set
+unchanged against the same deployment.
+
+**The no-pagination defect (see above) recurred and was worse.** Because
+neither validation run cleans up the todos its own specs create,
+`test-user`'s account had grown back to **32** todos by the time this run
+started (22 left over from the 2026-09-19 cleanup's own re-proof runs, plus
+~10 more from the 2026-09-19 re-validation's full-suite run). With 32 > 20,
+**10 of 12 specs failed** on their first full-suite run — every spec that adds
+a todo and then asserts it's visible timed out on `todoRow(...)`, because the
+API was correctly storing the todo (confirmed via direct `GET
+/me/todos?limit=100`, `count: 32`) but the UI's unpaginated first-page fetch
+(`limit=20`, oldest-first) never reached it. This is the same defect flagged
+above, now reproducing at the scale of the whole suite rather than one spec.
+
+Cleaned up again: fetched all 32 of `test-user`'s todo IDs via
+`GET /me/todos?limit=100` and deleted each via `DELETE /me/todos/{id}`
+(`test-user-2` was already at 0). Re-ran the full suite against the now-empty
+accounts: **11/12 pass**, only AC-007-a fails — confirming the mass failure
+was entirely the pagination defect, not a regression in the other 10
+criteria. Re-ran `AC-007-a.spec.ts` alone a second time to confirm
+consistency.
+
+**AC-007-a itself is unchanged from 2026-09-19**: reproduced live with
+playwright-cli (fresh sign-in, click the user menu, click "Sign out") — the
+click still navigates to the IdP's `/oauth2/logout?id_token_hint=...&post_logout_redirect_uri=...`
+and lands on the same "invalid post_logout_redirect_uri" error page. The
+`prompt: "login"` retry added in commit `99dbc0a` still never runs, because
+`signoutRedirect()` still doesn't reject — it navigates the browser away
+before any catch block could fire. Confirmed genuine, not healed.
+
+**This defect will keep recurring every validation cycle** until either the
+todo-webapp adds pagination (or the test accounts are reset between runs).
+Recommended as a product bug distinct from AC-007-a: `todo-webapp/src/pages/TodoList.tsx`
+calls `GET /me/todos` with no `limit`/`offset`, so any account (test or real)
+that accumulates more than 20 todos permanently stops seeing new ones it
+creates.
+
+## Re-validation 2026-09-20 (cycle 4) — same result, pre-emptive account cleanup
+
+No app commits landed on `main` since the prior cycle (HEAD is still
+`1574ac5`); this cycle re-ran the same 12-spec regression set unchanged
+against the same deployment.
+
+**Pre-emptive cleanup, this time before running rather than after a false
+failure.** Before running the suite, checked both test accounts directly via
+the API: `test-user` had 11 leftover todos (from the prior cycle's own spec
+runs), `test-user-2` had 0. Since the suite's own runs add ~8 more to
+`test-user` and the known pagination defect (above) bites once an account
+passes 20, deleted `test-user`'s 11 leftover todos via `DELETE
+/me/todos/{id}` before starting, to keep this run's own creates safely under
+the limit. This avoided the mass false-failure seen on 2026-09-20's earlier
+cycle.
+
+**Result: 11/12 pass, single run, no false failures.** `AC-007-a` is the only
+failure, reproduced identically to every prior cycle: after clicking "Sign
+out", the app navigates to the IdP's `/oauth2/logout` and lands on its
+"invalid post_logout_redirect_uri" error page instead of returning to the
+app's own sign-in screen (confirmed via the failed run's
+`error-context.md`, which captured the same error text on the page). Not
+healed — genuine, unchanged app defect since the `99dbc0a` fix attempt.
+
+All other 11 criteria (AC-001-a/b, AC-002-a/b, AC-003-a/b, AC-004-a/b,
+AC-005-a, AC-006-a, AC-007-b) pass.
+
+**Recommendation unchanged**: this project needs a real fix for AC-007-a
+(the IdP's logout endpoint needs a registered/valid `post_logout_redirect_uri`
+for this client, or the app needs to stop relying on IdP-side logout and
+instead just clear its local session) and, separately, pagination in
+`TodoList.tsx` to prevent the recurring false-failure risk documented above.

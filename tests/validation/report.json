@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "issue": 7,
-  "commit": "99dbc0a457aa06162b11bea6d89470a156231379",
-  "generatedAt": "2026-09-19T06:23:47.242Z",
+  "commit": "0ad11d8c18751d4f6ed121d77466fa4f6cc5ef01",
+  "generatedAt": "2026-09-20T06:37:12.185Z",
   "playwrightVersion": "1.61.1",
   "batches": [
     {
-      "file": "2026-09-19T06-19-02-253Z.json",
+      "file": "2026-09-20T06-32-45-943Z.json",
       "specs": 12
     }
   ],
@@ -31,9 +31,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 11888,
+      "durationMs": 11775,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-001-b",
@@ -45,9 +45,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 13316,
+      "durationMs": 13509,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-002-a",
@@ -59,9 +59,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 13778,
+      "durationMs": 13628,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-002-b",
@@ -73,9 +73,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 13606,
+      "durationMs": 13755,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-003-a",
@@ -87,9 +87,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 13980,
+      "durationMs": 14061,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-003-b",
@@ -101,9 +101,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 27306,
+      "durationMs": 27343,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-004-a",
@@ -115,9 +115,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 14842,
+      "durationMs": 14020,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-004-b",
@@ -129,9 +129,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 15954,
+      "durationMs": 14535,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-005-a",
@@ -143,9 +143,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 14060,
+      "durationMs": 13770,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-006-a",
@@ -157,9 +157,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 14120,
+      "durationMs": 13764,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-007-a",
@@ -171,12 +171,12 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 34450,
+      "durationMs": 34094,
       "failure": {
         "message": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByRole('button', { name: 'Sign In' })\nExpected: visible\nTimeout: 20000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" with timeout 20000ms\n  - waiting for getByRole('button', { name: 'Sign In' })\n",
         "location": "AC-007-a.spec.ts:7"
       },
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     },
     {
       "id": "AC-007-b",
@@ -188,9 +188,9 @@
       "healed": false,
       "healAttempts": 0,
       "flaky": false,
-      "durationMs": 27623,
+      "durationMs": 27480,
       "failure": null,
-      "batch": "2026-09-19T06-19-02-253Z.json"
+      "batch": "2026-09-20T06-32-45-943Z.json"
     }
   ]
 }
